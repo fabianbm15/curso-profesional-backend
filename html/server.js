@@ -4,7 +4,13 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-app.use("/assets", express.static("assets")); // Insertar middleware
+app.use(
+  "/assets",
+  express.static("assets", {
+    etag: false,
+    maxAge: "5h",
+  })
+); // Insertar middleware
 
 app.get("/", (req, res) => {
   res.render("index");
